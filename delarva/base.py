@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Iterable, Union
 
 from nextcord import Interaction, slash_command
+from nextcord.ext.application_checks import is_owner  # pyright: ignore[reportUnknownVariableType]
 from nextcord.ext.commands import AutoShardedBot, Bot, Cog
 
 BotT = Union[Bot, AutoShardedBot]
@@ -20,6 +21,7 @@ class Base(Cog):
             self.debug.default_member_permissions = 8
 
     @slash_command()
+    @is_owner()
     async def debug(self, interaction: Interaction):  # type: ignore
         ...
 

@@ -34,7 +34,9 @@ def human_size(byte: int) -> str:
     return f"{byte / (1024 ** power):.2f} {units[power]}"
 
 
-@Base.debug.subcommand(name="info")  # pyright: ignore[reportUnknownMemberType]
+@Base.debug.subcommand(  # pyright: ignore[reportUnknownMemberType]
+    name="info", inherit_hooks=True
+)
 async def debug_info(interaction: Interaction[BotT]):
     from . import __version__
 

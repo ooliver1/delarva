@@ -82,7 +82,9 @@ class CatchErrors:
             )
 
 
-@Base.debug.subcommand(name="eval")  # pyright: ignore[reportUnknownMemberType]
+@Base.debug.subcommand(  # pyright: ignore[reportUnknownMemberType]
+    name="eval", inherit_hooks=True
+)
 async def debug_eval(interaction: Interaction[BotT], ephemeral: bool = False):  # type: ignore
     """Evaluate some code.
 
