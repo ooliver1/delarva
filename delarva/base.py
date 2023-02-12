@@ -17,6 +17,7 @@ class Base(Cog):
     def __init__(self, guild_ids: Iterable[int] | None = None):
         if guild_ids is not None:
             self.debug.guild_ids_to_rollout = set(guild_ids)
+            self.debug.default_member_permissions = 8
 
     @slash_command()
     async def debug(self, interaction: Interaction):  # type: ignore
@@ -25,6 +26,7 @@ class Base(Cog):
 
 def setup(bot: Bot | AutoShardedBot, guild_ids: Iterable[int] | None = None):
     from . import eval, info
+
     del eval, info
 
     bot.add_cog(Base(guild_ids))
