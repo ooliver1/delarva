@@ -3,6 +3,7 @@
 ci:
   autofix_commit_msg: |
     style: auto fixes from pre-commit hooks
+
 repos:
   - repo: https://github.com/psf/black
     rev: 23.1.0
@@ -21,15 +22,7 @@ repos:
     hooks:
       - id: flake8
         name: Running flake8 in all files.
-        additional_dependencies: [flake8-isort, Flake8-pyproject]
-
-  - repo: https://github.com/ariebovenberg/slotscheck
-    rev: v0.16.4
-    hooks:
-      - id: slotscheck
-        name: Running slotscheck in all files.
-        exclude: "^(?!mafic/)"
-        additional_dependencies: [nextcord, aiohttp]
+        additional_dependencies: [flake8-isort]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
@@ -48,7 +41,6 @@ repos:
         name: Check for debug statements.
       - id: end-of-file-fixer
         name: Check for only one newline character at EOL.
-        exclude: "^(test_bot/logs/)"
       - id: trailing-whitespace
         name: Check for trailing whitespace.
         args: [--markdown-linebreak-ext=md]
