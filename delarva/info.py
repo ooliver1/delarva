@@ -40,21 +40,6 @@ def human_size(byte: int) -> str:
 async def debug_info(interaction: Interaction[BotT]):
     from . import __version__
 
-    # delarva version
-    # nextcord version
-    # python version
-    # os
-    # load time
-    # memory usage - total, virtual and process
-    # pid - process, thread count
-    # sharded
-    # shard count
-    # guild count
-    # user count
-    # intents
-    # latency
-    # member cache
-
     embed = Embed(colour=0x8000FF)
 
     embed.add_field(
@@ -91,16 +76,16 @@ async def debug_info(interaction: Interaction[BotT]):
         )
 
     if isinstance(interaction.client, AutoShardedClient):
-        assert interaction.client.shard_ids is not None
-        if len(interaction.client.shard_ids) > 25:
+        if len(interaction.client.shards) > 25:
             shard_info = (
-                f"Automatically sharded ({len(interaction.client.shard_ids)} "
+                f"Automatically sharded ({len(interaction.client.shards)} "
                 f"shards of {interaction.client.shard_count})"
             )
         else:
+            shard_ids = ", ".join(str(s) for s in interaction.client.shards.keys())
             shard_info = (
-                f"Automatically sharded ({', '.join(str(s) for s in interaction.client.shard_ids)} "
-                f"of {interaction.client.shard_count})"
+                f"Automatically sharded ({shard_ids} of"
+                f" {interaction.client.shard_count})"
             )
     else:
         if interaction.client.shard_count is None:
